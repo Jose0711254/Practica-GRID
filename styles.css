@@ -1,0 +1,146 @@
+/* Variables CSS: Personalidad y Colores */
+:root {
+    --primary: #6366f1;     /* Indigo vibrante */
+    --secondary: #f43f5e;   /* Rosa intenso */
+    --accent: #10b981;      /* Esmeralda */
+    --dark: #1e293b;        /* Slate oscuro */
+    --light: #f8fafc;       /* Fondo suave */
+    --shadow-color: rgba(30, 41, 59, 0.2);
+    --radius: 24px;
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Base del Documento */
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    font-family: 'Outfit', sans-serif; /* Tipografía moderna */
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Configuración de Grid Layout */
+.moodboard-grid {
+    display: grid;
+    gap: 24px;
+    max-width: 1100px;
+    grid-template-columns: repeat(4, 1fr);
+    /* Definimos una estructura asimétrica única */
+    grid-template-areas: 
+        "ident ident img1 img1"
+        "bio bio list img2"
+        "proyect proyect link1 link2";
+}
+
+/* Estilo de Tarjetas "Elevadas" */
+.card {
+    background: white;
+    border: 2px solid var(--dark);
+    border-radius: var(--radius);
+    padding: 30px;
+    position: relative;
+    /* Sombra sólida desplazada para el efecto 3D moderno */
+    box-shadow: 10px 10px 0px var(--dark);
+    transition: var(--transition);
+    overflow: hidden;
+
+    /* Primer Anidamiento: Efecto Hover dinámico */
+    &:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 15px 15px 0px var(--primary);
+        
+        .tag { background: var(--primary); }
+    }
+}
+
+/* Asignación de áreas del Grid */
+.profile-block { grid-area: ident; background: linear-gradient(135deg, #e0e7ff, #ffffff); }
+.image-block-1 { grid-area: img1; padding: 0; }
+.bio-block { grid-area: bio; }
+.list-block { grid-area: list; background: var(--dark); color: white; border: none; }
+.image-block-2 { grid-area: img2; padding: 0; }
+.project-intro { grid-area: proyect; }
+.action-block { 
+    grid-area: link1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    &.footer-block { grid-area: link2; } /* Segundo Anidamiento */
+}
+
+/* Componentes Visuales */
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--dark);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+/* Imágenes que ocupen todo el espacio de la caja*/
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Lista de intereses estilizada */
+.list-block ul {
+    list-style: none;
+    padding: 0;
+    li {
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        span { color: var(--secondary); font-weight: bold; margin-right: 8px; }
+    }
+}
+
+/* Botones con foco visual */
+.btn-main {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+    border: 2px solid var(--dark);
+    padding: 10px 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: var(--transition);
+
+    &:hover {
+        background: var(--dark);
+        color: white;
+    }
+}
+
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+
+/* Tablets: Pasamos a 2 columnas */
+@media (max-width: 900px) {
+    .moodboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "ident ident"
+            "img1 img1"
+            "bio bio"
+            "list img2"
+            "proyect proyect"
+            "link1 link2";
+    }
+}
+
+/* Móviles: Todo a 1 columna */
+@media (max-width: 600px) {
+    .moodboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "ident" "img1" "bio" "list" "img2" "proyect" "link1" "link2";
+    }
+    .card { padding: 20px; }
+}
